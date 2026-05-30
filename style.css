@@ -1,0 +1,71 @@
+body { background: #121212; color: #fff; font-family: sans-serif; margin: 0; }
+header { background: #222; padding: 15px; display: flex; justify-content: space-between; border-bottom: 2px solid #444; }
+.grid-container { display: grid; grid-template-columns: 250px 1fr 300px; gap: 10px; padding: 10px; height: 85vh; }
+
+/* Update these specific sections in style.css */
+.panel { 
+    background: #1e1e1e; 
+    padding: 10px; 
+    border-radius: 5px; 
+    overflow: hidden; /* Prevent global scrollbars */
+    display: flex; 
+    flex-direction: column; /* Stack children vertically */
+    height : 97%;
+}
+
+/* Center Panel specific styling */
+.center-panel {
+    display: flex;
+    flex-direction: column;
+    height: 97%;
+    gap: 10px;
+}
+
+#map { 
+    flex: 0 0 350px; /* Force Map to be exactly 350px high */
+    width: 100%; 
+    background: #333; 
+}
+
+.bottom-center {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    flex: 1; /* Takes all remaining space below the map */
+    min-height: 0;
+    padding-top: 5px;
+}
+
+#altChart { flex: 3; min-width: 0; margin-right: 5px;}
+/* Ensure the 3D container is not squashed against the edge */
+#three-container { 
+    flex: 1; 
+    background: #000; 
+    border-radius: 5px;
+    margin-left: 5px; /* Adds separation from the chart */
+}
+/* Clean up canvas constraints */
+canvas { width: 100% !important; height: 100% !important; }
+.console { height: 100%; background: #000; font-size: 11px; color: #0f0; overflow-y: auto; }
+
+button {
+    background-color: #276994;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.1s ease, background-color 0.2s; /* Smooths the transition */
+}
+
+/* The actual animation when clicked */
+button:active {
+    transform: scale(0.95); /* Shrinks the button to 95% of size */
+    background-color: #2980b9; /* Darkens the color slightly */
+}
+
+/*over effect for better UX */
+button:hover {
+    background-color: #2980b9;
+}

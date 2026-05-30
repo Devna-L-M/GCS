@@ -48,11 +48,11 @@ function init3D() {
 function animate3D() { requestAnimationFrame(animate3D); renderer.render(scene, camera); }
 
 // Calibration Function
-function calibrate() {
+/*function calibrate() {
     altOffset = alt; // Set current reading as 0
     logEvent("System Calibrated: Alt offset set.");
 }
-
+*/
 // 4. Simulator Logic
 document.getElementById('launch-btn').onclick = () => {
     if (timer) return;

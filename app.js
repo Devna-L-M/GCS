@@ -56,6 +56,7 @@ function animate3D() { requestAnimationFrame(animate3D); renderer.render(scene, 
 // 4. Simulator Logic
 document.getElementById('launch-btn').onclick = () => {
     if (timer) return;
+    resetFlight();
     timer = setInterval(() => {
         time++;
         packetCount++;
@@ -81,8 +82,22 @@ document.getElementById('launch-btn').onclick = () => {
         //Update Signal
         rssi = -45 + Math.floor(Math.random() * 20); // Random noise
         document.getElementById('val-rssi').innerText = rssi;
-        if (alt <= 0) { alt = 0; vel = 0; updateStatus("Landing"); clearInterval(timer); }
-        
+
+        document.getElementById('stop-btn').onclick = () => {
+                if (!timer) return; // Nothing to stop
+
+                // Show confirmation dialog
+                if (confirm("Are you sure you want to stop telemetry?")) {
+                    clearInterval(timer);
+                    timer = null; // Reset the timer variable
+                    updateStatus("Telemetry Stopped by User");
+                    
+                    // Optional: Change button back to a "Stopped" state
+                    document.getElementById('stop-btn').style.backgroundColor = "#7f8c8d";
+                    document.getElementById('stop-btn').disabled = true;
+                }
+            };
+
        document.getElementById('val-range').innerText = distanceFeet;
         
         let currentStage = document.getElementById('status-display').innerText;
@@ -101,6 +116,29 @@ document.getElementById('launch-btn').onclick = () => {
         updateUI();
     }, 200);
 };
+
+function resetFlight() {
+    time = 0;
+    packetCount = 0;
+    alt = 0;
+    vel = 0;
+    batt = 100;
+    pres = 1013;
+    lat = 8.5241;
+    lon = 76.9366;
+    dataLog = []; // Clear previous flight logs
+    
+    // Reset UI
+    document.getElementById('console').innerHTML = ""; // Clear log
+    chart.data.labels = []; // Clear chart
+    chart.data.datasets[0].data = [];
+    chart.update();
+    
+    // Re-enable/reset Stop button
+    const stopBtn = document.getElementById('stop-btn');
+    stopBtn.disabled = false;
+    stopBtn.style.backgroundColor = "#c0392b"; 
+}
 
 function updateUI() {
     document.getElementById('p-count').innerText = packetCount;

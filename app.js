@@ -80,7 +80,7 @@ document.getElementById('launch-btn').onclick = () => {
 
         //Update Signal
         rssi = -45 + Math.floor(Math.random() * 20); // Random noise
-
+        document.getElementById('val-rssi').innerText = rssi;
         if (alt <= 0) { alt = 0; vel = 0; updateStatus("Landing"); clearInterval(timer); }
         
        document.getElementById('val-range').innerText = distanceFeet;

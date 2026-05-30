@@ -37,6 +37,7 @@ header { background: #222; padding: 15px; display: flex; justify-content: space-
 }
 
 #altChart { flex: 3; min-width: 0; margin-right: 5px;}
+
 /* Ensure the 3D container is not squashed against the edge */
 #three-container { 
     flex: 1; 
@@ -59,13 +60,13 @@ button {
     transition: transform 0.1s ease, background-color 0.2s; /* Smooths the transition */
 }
 
-/* The actual animation when clicked */
+
 button:active {
     transform: scale(0.95); /* Shrinks the button to 95% of size */
     background-color: #2980b9; /* Darkens the color slightly */
 }
 
-/*over effect for better UX */
+/*hover effect for better UX */
 button:hover {
     background-color: #2980b9;
 }

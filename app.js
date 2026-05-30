@@ -16,17 +16,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 // Add the moving rocket marker
 const marker = L.marker([lat, lon]).addTo(map).bindPopup("Rocket");
 
-// Inside your setInterval, add this:
 let currentPos = L.latLng(lat, lon);
 let startPos = L.latLng(startLat, startLon);
 
 // Calculate distance in meters, convert to feet (1 meter = 3.28084 feet)
 let distanceMeters = currentPos.distanceTo(startPos);
 let distanceFeet = (distanceMeters * 3.28084).toFixed(0);
-
-// Add distance to dataLog if you want it in your CSV
-// ... inside your dataLog.push object:
-// range: distanceFeet
 
 // Update the UI
 document.getElementById('val-range').innerText = distanceFeet;
@@ -72,18 +67,18 @@ document.getElementById('launch-btn').onclick = () => {
         batt -= 0.01; // Slower battery drain
         pres = 1013 - (alt / 30);
         
-        // Update GPS & Signal
+        // Update GPS
         lat += 0.0001; lon += 0.0001;
 
         // Update Map Marker position slightly
         marker.setLatLng([lat, lon]);
 
-        // NEW: Calculate distance
         let currentPos = L.latLng(lat, lon);
         let startPos = L.latLng(startLat, startLon);
         let distanceMeters = currentPos.distanceTo(startPos);
         let distanceFeet = (distanceMeters * 3.28084).toFixed(0);
 
+        //Update Signal
         rssi = -45 + Math.floor(Math.random() * 20); // Random noise
 
         if (alt <= 0) { alt = 0; vel = 0; updateStatus("Landing"); clearInterval(timer); }
@@ -142,7 +137,7 @@ document.getElementById('download-btn').onclick = () => {
 init3D();
 
 /*
-// Add this helper to your app.js to keep the 3D view consistent
+// helper to keep the 3D view consistent
 function resize3D() {
     const container = document.getElementById('three-container');
     if (renderer && container) {
